@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LaunchmodeDemo"
+        tools:targetApi="31">
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true"
+            android:noHistory="true"> <!--noHistory为true则该activity在切换到其它activity时不会被保存在堆栈中(被finish了)
+            这适合欢迎页等“临时性”页面。该属性慎用，同样的效果可以在代码中实现，更稳妥。noHistory=true的情况下app切后台会导致该
+            activity立即销毁，从后台再切回时会重新create该activity，这往往不符合我们的预期。-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:exported="false" /> <!--singleTask一般用于主页。主页我们只需要一个实例，并且很多情况下我们需要
+            能便捷的回到主页，singleTask的特性很适合。比如在进入子页面很深的情况下，我们回到主页不希望逐个页面回退，而希望
+            就像普通的页面跳转一样只需要调一次startActivity，但是不需要再创建主页的实例而使用已有的，并且主页上面的其它页面
+            能自动销毁让主页面处于top位置，singleTask就能满足这样的需求。像b站如果嵌套浏览很深后视频页面左上角会有一个
+            回到主页的按钮。-->
+        <activity
+            android:name=".SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ThirdActivity"
+            android:launchMode="singleTop"
+            android:exported="false" /> <!--ThirdActivity作为通知详情展示页，点击通知跳转到改页，需要使用singleTop模式
+            才符合交互预期，否则点击一次通知就创建一个详情页。-->
+    </application>
+
+</manifest>
