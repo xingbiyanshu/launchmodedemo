@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LaunchmodeDemo"
         tools:targetApi="31">
+        <!--activity及task详情可以通过命令查看："adb shell dumpsys activity activities com.example.launchmodedemo"-->
         <activity
             android:name=".WelcomeActivity"
             android:exported="true"
@@ -36,7 +37,14 @@
             回到主页的按钮。-->
         <activity
             android:name=".SecondActivity"
-            android:exported="false" />
+            android:launchMode="singleInstance"
+            android:taskAffinity="my.own"
+            android:exported="false" /> <!-- singleInstance用于这种场景：
+            该页面是我们打开的，但是我们不期望它是我们页面回退流程的一部分，该页面和应用中的其它页面没有连续性，
+            我们并不想在正常操作应用的时候又跳到该页面去。比如外卖app中打电话，电话页面和外卖页面没有关联，尽管它是由外卖app页面拉起的。
+            最近任务列表是根据taskAffinity组织的，多个affinity相同的task会组织为一个条目，所以如果希望singleInstance的
+            activity单独在任务列表展示，需要单独为其指定affinity。单独在任务列表展示的好处是可以单独对其进行操作，比如删除拉起到前台等，
+            使得其完全独立于其他的activity-->
         <activity
             android:name=".ThirdActivity"
             android:launchMode="singleTop"
