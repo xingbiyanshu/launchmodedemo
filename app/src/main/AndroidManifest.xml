@@ -38,13 +38,20 @@
         <activity
             android:name=".SecondActivity"
             android:launchMode="singleInstance"
-            android:taskAffinity="my.own"
             android:exported="false" /> <!-- singleInstance用于这种场景：
             该页面是我们打开的，但是我们不期望它是我们页面回退流程的一部分，该页面和应用中的其它页面没有连续性，
             我们并不想在正常操作应用的时候又跳到该页面去。比如外卖app中打电话，电话页面和外卖页面没有关联，尽管它是由外卖app页面拉起的。
             最近任务列表是根据taskAffinity组织的，多个affinity相同的task会组织为一个条目，所以如果希望singleInstance的
             activity单独在任务列表展示，需要单独为其指定affinity。单独在任务列表展示的好处是可以单独对其进行操作，比如删除拉起到前台等，
-            使得其完全独立于其他的activity-->
+            使得其完全独立于其他的activity。
+            不加taskAffinity则当跳转到ThirdActivity后最近任务列表是看不见SecondActivity的。
+            在 Android 里，同一个 taskAffinity 可以被创建出多个 Task，但它们最多只能有一个显示在最近任务列表。
+            不止 Activity 在 Task 内部可以叠成栈，不同的 Task 之间也可以叠起来。上面的task中的activity全部弹出后，下面的task就展示出来了。
+            效果就是在SecondActivity按返回键会展示MainActivity（实际是展示MainActivity所属task）。
+            不过有一点：Task 的叠加，只适用于前台 Task，前台叠加的多个 Task 在进入后台的第一时间就会被拆开。
+            前台 Task 进入后台最常见的场景有两种：按 Home 键回到桌面，以及按最近任务键查看最近任务。也就是说如果SecondActivity展示后
+            按下home或者查看最近任务列表，然后再从任务列表选中SecondActivity使其回到前台，再按下返回键，此时会直接回到桌面而非MainActivity。
+            进入SecondActivity时能明显感受到动画效果，因为新建了task，这是task间切换的动画效果。-->
         <activity
             android:name=".ThirdActivity"
             android:launchMode="singleTop"
