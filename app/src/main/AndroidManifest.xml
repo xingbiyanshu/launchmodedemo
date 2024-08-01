@@ -38,6 +38,7 @@
         <activity
             android:name=".SecondActivity"
             android:launchMode="singleInstance"
+            android:taskAffinity="my.own"
             android:exported="false" /> <!-- singleInstance用于这种场景：
             该页面是我们打开的，但是我们不期望它是我们页面回退流程的一部分，该页面和应用中的其它页面没有连续性，
             我们并不想在正常操作应用的时候又跳到该页面去。比如外卖app中打电话，电话页面和外卖页面没有关联，尽管它是由外卖app页面拉起的。
