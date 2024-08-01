@@ -32,6 +32,17 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        Thread.sleep(1000) // Logcat中过滤Displayed查看Activity的TTID(time to initial display)耗时
+    }
+
+    override fun onAttachedToWindow() {
+        println("### MainActivity#onAttachedToWindow")
+        super.onAttachedToWindow()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        println("### MainActivity#onWindowFocusChanged")
+        super.onWindowFocusChanged(hasFocus)
     }
 
     override fun onNewIntent(intent: Intent) {

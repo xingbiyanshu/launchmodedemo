@@ -22,6 +22,15 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
     }
+    override fun onAttachedToWindow() {
+        println("### WelcomeActivity#onAttachedToWindow")
+        super.onAttachedToWindow()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        println("### WelcomeActivity#onWindowFocusChanged")
+        super.onWindowFocusChanged(hasFocus)
+    }
 
     override fun onNewIntent(intent: Intent) {
         println("### WelcomeActivity#onNewIntent ${intent.toString()}")

@@ -12,5 +12,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+<!--        <item name="android:windowIsTranslucent" >true</item>-->
+<!--        <item name="android:windowBackground">@drawable/ic_launcher_foreground</item>-->
+<!--        <item name="android:windowDisablePreview">true</item>-->
+    </style>
+
+<!--    <style name="SplashTheme" parent="AppTheme">-->
+<!--        <item name="android:windowBackground">@drawable/splash</item>-->
+<!--        <item name="android:windowIsTranslucent">false</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--    </style>-->
+    <style name="StartTheme" parent="Theme.AppCompat">
+        <item name="android:windowDisablePreview">true</item>
     </style>
 </resources>
